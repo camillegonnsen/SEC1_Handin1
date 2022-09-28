@@ -24,7 +24,7 @@ r = 35
 def encrypt(message, privateKey):
     #2. compute Alice's public key: c1 = g^r mod p
     c_1 = (g**r) % p
-    #3. compute the encrypted message: c2 = m · (pk^r mod p)
+    #3. compute the encrypted message: c2 = m * (pk^r mod p)
     c_2 = message * (privateKey**r % p)
     return (c_1,c_2)
     
@@ -34,7 +34,7 @@ print("c =", c)
 def decrypt(c, secretKey):
     #Unpacking tuple
     (c1,c2) = c
-    #To decrypt we can use the formula c2/((g^r)^sk mod p)
+    #To decrypt we can use the formula c2/(g^(r^sk) mod p)
     #We know that c1 = g^r mod p and you can therefore replace g^r mod p with c1
     m = c2/((c1**secretKey) % p)
     return m
